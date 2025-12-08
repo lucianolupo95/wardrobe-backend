@@ -13,4 +13,14 @@ type Clothing struct {
     CreationDate time.Time `db:"creation_date" json:"creationDate"`
     UpdatedAt    time.Time `db:"updated_at" json:"updatedAt"`
     Notes        string    `db:"notes" json:"notes"`
+    DeletedAt   *time.Time `db:"deleted_at" json:"-"`
+}
+type ClothingCreateInput struct {
+    Name       string `json:"name" binding:"required"`
+    PhotoURL   string `json:"photoUrl" binding:"required"`
+    SeasonID   int    `json:"seasonId" binding:"required"`
+    CategoryID int    `json:"categoryId" binding:"required"`
+    StatusID   int    `json:"statusId" binding:"required"`
+    Visible    bool   `json:"visible"`
+    Notes      string `json:"notes"`
 }

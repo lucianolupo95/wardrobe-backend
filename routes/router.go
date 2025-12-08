@@ -15,5 +15,6 @@ func RegisterRoutes(r *gin.Engine) {
         clothes.POST("/", handlers.CreateClothing)
         clothes.PUT("/:id", handlers.UpdateClothing)
         clothes.DELETE("/:id", handlers.DeleteClothing)
+        clothes.PATCH("/:id/restore", handlers.RestoreClothing)
     }
 }
