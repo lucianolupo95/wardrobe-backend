@@ -13,7 +13,6 @@ import (
 var DB *sqlx.DB
 
 func Connect() {
-    // Load environment variables
 	err := godotenv.Load("./.env")
 	if err != nil {
 		log.Println("No pude cargar el .env en la carpeta actual")

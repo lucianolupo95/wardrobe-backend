@@ -27,7 +27,6 @@ func GetAllClothes(c *gin.Context) {
 
 
 func GetClothingByID(c *gin.Context) {
-    // Obtener el id de la URL
     idParam := c.Param("id")
     id, err := strconv.Atoi(idParam)
     if err != nil {
@@ -37,7 +36,6 @@ func GetClothingByID(c *gin.Context) {
         return
     }
 
-    // Query a la base
     var item models.Clothing
     query := "SELECT * FROM clothes WHERE id = $1 AND deleted_at IS NULL LIMIT 1"
 
@@ -57,7 +55,6 @@ func GetClothingByID(c *gin.Context) {
         return
     }
 
-    // Si existe, devolverlo
     c.JSON(http.StatusOK, item)
 }
 
@@ -65,7 +62,6 @@ func GetClothingByID(c *gin.Context) {
 func CreateClothing(c *gin.Context) {
     var input models.ClothingCreateInput
 
-    // Leer el body
     if err := c.ShouldBindJSON(&input); err != nil {
         c.JSON(http.StatusBadRequest, gin.H{
             "error": "invalid json",
@@ -74,7 +70,6 @@ func CreateClothing(c *gin.Context) {
         return
     }
 
-    // Query INSERT con RETURNING id
     query := `
         INSERT INTO clothes
             (name, photo_url, season_id, category_id, status_id, visible, notes)
@@ -106,7 +101,6 @@ func CreateClothing(c *gin.Context) {
         return
     }
 
-    // Completar los campos faltantes
     created.Name = input.Name
     created.PhotoURL = input.PhotoURL
     created.SeasonID = input.SeasonID
@@ -176,7 +170,6 @@ func UpdateClothing(c *gin.Context) {
         return
     }
 
-    // completar datos desde input
     updated.Name = input.Name
     updated.PhotoURL = input.PhotoURL
     updated.SeasonID = input.SeasonID

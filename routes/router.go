@@ -10,7 +10,7 @@ func RegisterRoutes(r *gin.Engine) {
 
 	clothes := api.Group("/clothes")
 	{
-		clothes.GET("", handlers.GetAllClothes) // ← este era el problema
+		clothes.GET("", handlers.GetAllClothes)
 		clothes.GET("/:id", handlers.GetClothingByID)
 		clothes.POST("", handlers.CreateClothing)
 		clothes.PUT("/:id", handlers.UpdateClothing)

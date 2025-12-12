@@ -20,7 +20,6 @@ func main() {
 		AllowHeaders: []string{"*"},
 	}))
 
-	// Health check
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{"status": "ok"})
 	})
@@ -29,7 +28,6 @@ func main() {
 		c.Next()
 	})
 
-	// Registrar rutas
 	routes.RegisterRoutes(r)
 
 	r.Run(":8080")
