@@ -6,15 +6,15 @@ import (
 )
 
 func RegisterRoutes(r *gin.Engine) {
-    api := r.Group("/api")
+	api := r.Group("/api")
 
-    clothes := api.Group("/clothes")
-    {
-        clothes.GET("/", handlers.GetAllClothes)
-        clothes.GET("/:id", handlers.GetClothingByID)
-        clothes.POST("/", handlers.CreateClothing)
-        clothes.PUT("/:id", handlers.UpdateClothing)
-        clothes.DELETE("/:id", handlers.DeleteClothing)
-        clothes.PATCH("/:id/restore", handlers.RestoreClothing)
-    }
+	clothes := api.Group("/clothes")
+	{
+		clothes.GET("", handlers.GetAllClothes) // ← este era el problema
+		clothes.GET("/:id", handlers.GetClothingByID)
+		clothes.POST("", handlers.CreateClothing)
+		clothes.PUT("/:id", handlers.UpdateClothing)
+		clothes.DELETE("/:id", handlers.DeleteClothing)
+		clothes.PATCH("/:id/restore", handlers.RestoreClothing)
+	}
 }
